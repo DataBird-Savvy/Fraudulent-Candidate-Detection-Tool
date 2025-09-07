@@ -56,7 +56,7 @@ class FraudReportGenerator:
                 partial_variables={"format_instructions": format_instructions},
                 template=template,
             )
-            # Chain parser directly
+            
             self.chain = self.prompt | self.llm | self.parser
             logger.info("FraudReportGenerator initialized successfully.")
 
@@ -84,7 +84,7 @@ class FraudReportGenerator:
                 f"education_analysis: {education_analysis or {}}"
             )
 
-            # --- Invoke LLM (already parsed to FraudReport) ---
+            
             report_structured = self.chain.invoke({
                 "analysis": str(analysis),
                 "plagiarism_cv": plagiarism_cv,

@@ -11,7 +11,7 @@ from src.plagiarism_detector import PlagiarismDetector
 from src.education_analyzer import AIEducationValidator
 from src.fraud_reporter import FraudReportGenerator
 from exception import ResumeFraudException
-from src.structured_data import FraudReport
+
 from logger import logger
 from dotenv import load_dotenv
 load_dotenv()
@@ -38,7 +38,7 @@ def root():
     return {"message": "Fraud Detection API Running"}
 
 
-@app.post("/analyze", response_model=FraudReport)
+@app.post("/analyze")
 async def analyze_resume(file: UploadFile = File(...), jd: Optional[str] = Form(None)):
     try:
         logger.info(f"Received file: {file.filename}")
@@ -63,7 +63,7 @@ async def analyze_resume(file: UploadFile = File(...), jd: Optional[str] = Form(
         plagiarism_result_withcv = plagiarism_detector.check_resume_chunks(tmp_path)
 
         reporter = FraudReportGenerator()
-        report: FraudReport = reporter.generate_report(
+        report= reporter.generate_report(
             analysis, plagiarism_result_withcv, plagiarism_result_withJD, Education_analysis
         )
 

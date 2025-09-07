@@ -78,10 +78,10 @@ class ResumeParserLLM:
             text = self._extract_text(file_path)
             logger.info(f"Text extracted successfully from {file_path}. Parsing resume...")
 
-            # Invoke the chain directly; it will return a ResumeData object already
+           
             resume_data = self.chain.invoke({"resume_text": text})
 
-            # If using invoke, sometimes you get a dict with key 'output'
+            
             if isinstance(resume_data, dict) and "output" in resume_data:
                 resume_data = resume_data["output"]
 

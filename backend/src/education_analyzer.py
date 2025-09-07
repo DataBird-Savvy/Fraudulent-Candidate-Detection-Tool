@@ -11,11 +11,11 @@ load_dotenv()
 
 class AIEducationValidator:
     def __init__(self, parsed_data):
-        # Accept dict or object with .dict()
+        
         self.parsed_data = parsed_data.dict() if hasattr(parsed_data, "dict") else parsed_data
         self.education_list = self.parsed_data.get("education", [])
 
-        # Init Groq LLM
+        
         self.llm = ChatGroq(
             model="llama-3.1-8b-instant",
             temperature=0,
@@ -30,7 +30,7 @@ class AIEducationValidator:
 
         self.output_parser = StructuredOutputParser.from_response_schemas(self.response_schemas)
 
-        # Prompt with format instructions
+   
         self.prompt = PromptTemplate(
             input_variables=["education"],
             template="""
@@ -62,7 +62,7 @@ Return your answer in this format:
 
             logger.debug(f"Raw LLM response: {response.content}")
 
-            # Parse AI output into structured Python dict
+          
             result = self.output_parser.parse(response.content)
 
             suspicious = result.get("suspicious", False)
@@ -78,18 +78,4 @@ Return your answer in this format:
             raise ResumeFraudException("AI-based education validation failed.")
 
 
-# Example usage
-if __name__ == "__main__":
-    sample_resume = {
-        "education": [
-            {"degree": "Master", "institution": "XYZ Primary School", "start_date": "2022", "end_date": "2023"},
-            {"degree": "Bachelor", "institution": "Fake Tech University", "start_date": "2021", "end_date": "2022"}
-        ]
-    }
 
-    try:
-        validator = AIEducationValidator(sample_resume)
-        result = validator.validate()
-        print("Validation result:", result)
-    except ResumeFraudException as e:
-        print("Fraud Detected:", str(e))
