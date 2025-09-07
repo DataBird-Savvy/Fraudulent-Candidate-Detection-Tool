@@ -42,7 +42,7 @@ export default function HomePage() {
       if (!res.ok) throw new Error("Failed to analyze resume");
 
       const data = await res.json();
-      setReport(data.report);
+      setReport(data);
     } catch (err) {
       console.error(err);
       alert("Error analyzing resume.");
@@ -103,19 +103,11 @@ export default function HomePage() {
           {/* Plagiarism Summary */}
           <div className="report-block">
             <h3>Plagiarism Summary</h3>
-            {report.plagiarism_summary.map((p, idx) => (
-              <div key={idx} className="plagiarism-card">
-                <FaFileAlt className="plagiarism-icon" />
-                <div>
-                  <p>
-                    <strong>File:</strong> {p.source_file}
-                  </p>
-                  <p>
-                    <strong>Score:</strong> {p.score}
-                  </p>
-                </div>
-              </div>
-            ))}
+            <div className="report-card plagiarism-card">
+              <h3>Plagiarism Summary</h3>
+              <p>{report.plagiarism_summary}</p>
+            </div>
+
           </div>
 
           {/* Resume vs JD Similarity */}

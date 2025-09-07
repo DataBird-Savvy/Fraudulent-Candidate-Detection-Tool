@@ -1,4 +1,4 @@
-/* Root styles */
+/* ================= Root styles ================= */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -6,7 +6,7 @@ body {
   color: #171717;
 }
 
-/* Container */
+/* ================= Container ================= */
 .container {
   min-height: 100vh;
   padding: 20px;
@@ -15,15 +15,31 @@ body {
   align-items: center;
 }
 
-/* Heading */
+/* ================= Headings ================= */
 h1 {
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
   margin-bottom: 30px;
+  color: #111827; /* Deep blackish */
 }
 
-/* Form card */
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1f2937; /* Dark gray */
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #111; /* Strong dark */
+}
+
+/* ================= Form card ================= */
 .form-card {
   background: #fff;
   padding: 25px;
@@ -51,6 +67,7 @@ h1 {
   font-size: 1rem;
 }
 
+/* ================= Button ================= */
 button {
   padding: 12px;
   font-size: 1.1rem;
@@ -72,7 +89,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Report section */
+/* ================= Report section ================= */
 .report-section {
   margin-top: 40px;
   width: 100%;
@@ -83,19 +100,26 @@ button:disabled {
 }
 
 .report-section h2 {
-  text-align: center;
   font-size: 2rem;
   font-weight: bold;
+  text-align: center;
+  color: #1e293b; /* Dark slate */
 }
 
-/* Report blocks */
+/* ================= Report blocks ================= */
 .report-block {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Report cards */
+.report-block h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #111827; /* Strong visible dark */
+}
+
+/* ================= Report cards ================= */
 .report-card {
   background: #fefefe;
   padding: 20px;
@@ -119,7 +143,7 @@ button:disabled {
   background: #f3f4f6;
 }
 
-/* Status badge */
+/* ================= Status badge ================= */
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -149,7 +173,7 @@ button:disabled {
   height: 18px;
 }
 
-/* Plagiarism card */
+/* ================= Plagiarism card ================= */
 .plagiarism-card {
   display: flex;
   align-items: center;
@@ -167,6 +191,7 @@ button:disabled {
   height: 20px;
 }
 
+/* ================= Lists ================= */
 ul {
   margin: 0;
   padding-left: 20px;
