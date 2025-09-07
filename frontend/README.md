@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fraudulent Candidate Detection Tool
 
-## Getting Started
+## 1. Introduction
+The Fraudulent Candidate Detection Tool is designed to identify and flag potentially fraudulent resumes and candidates during the recruitment process. The system leverages Natural Language Processing (NLP), AI, and Information Retrieval (IR) techniques to analyze resumes, detect inconsistencies, and highlight suspicious patterns for HR teams.
 
-First, run the development server:
+## 2. Objectives
+- Detect fake or inflated work experience.
+- Identify inconsistencies in educational background.
+- Compare candidate skills with stated experience.
+- Detect plagiarism or copied content in resumes.
+- Provide actionable insights for HR teams with recommendations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 3. System Architecture
+The tool follows a modular architecture with the following key components:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Frontend (React/Next.js): Provides an intuitive interface for HR users to upload resumes and view results.
+2. Backend (FastAPI): Handles resume parsing, fraud detection logic, and API endpoints.
+3. Resume Parser (LLM-powered): Extracts structured data from resumes including education, work experience, skills, and personal details.
+4. Fraud Analyzer: Detects suspicious patterns such as overlapping dates, inconsistent education, and inflated job roles.
+5. Plagiarism Detector (Pinecone + Embeddings): Checks similarity of resumes against stored data to detect copied content using hybrid methods.
+6. Vector Database (Pinecone): Stores embeddings for plagiarism detection.
+7. Logging & Monitoring: Tracks system performance and anomalies.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 4. System Components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4.1 Resume Parsing (LLM-based) Module
+**ResumeParserLLM**  
+- Extracts structured data from resumes (PDF, DOCX, TXT).  
+- Uses Groq LLM (LLaMA models) with strict schema enforcement.  
+- Handles fields: Name, Email, Phone, Skills, Education, Experience.  
+- Falls back to empty schema on invalid parsing.
 
-## Learn More
+### 4.2 Experience Validation Module
+**FraudAnalyzerAI**  
+- Validates candidate’s career progression. Checks for:  
+  - Unrealistic career jumps (e.g., Intern → Manager in 6 months)  
+  - Very short tenures (<3 months)  
+  - Overlapping job roles  
 
-To learn more about Next.js, take a look at the following resources:
+### 4.3 Education Validation Module
+**AIEducationValidator**  
+- Detects anomalies in academic background:  
+  - Fake institutions  
+  - Unrealistic degree timelines  
+  - Overlapping or illogical dates  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4.4 Plagiarism Detection Module
+**PlagiarismDetector**  
+- Uses Pinecone hybrid index (dense + sparse embeddings).  
+- Compares candidate resume against stored resumes and optional Job Description (JD).  
+- Detects copied resumes or overlap with JD.  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Key Features
+- Automated resume parsing using NLP.  
+- Fraud detection for education, experience, and skills.  
+- Plagiarism detection using embeddings and vector search.  
+- Actionable insights for HR teams.  
+- Scalable architecture with modular components.  
+- Secure data handling with authentication and encryption.
 
-## Deploy on Vercel
+## Technologies and Tools Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Layer / Component                | Technology / Tool               | Purpose / Description                                                                 |
+|---------------------------------|---------------------------------|-------------------------------------------------------------------------------------|
+| Frontend                         | React, Next.js                  | Provides a user-friendly interface for uploading resumes and viewing reports         |
+| Frontend Styling                  | CSS / Tailwind (optional)       | Styling and layout of the UI                                                       |
+| Backend                          | FastAPI                         | Handles API endpoints, resume analysis, and integrates various modules             |
+| Resume Parsing                    | LLaMA / Groq LLM                | Extract structured data (education, experience, skills, personal info) from resumes |
+| Schema Validation                 | Pydantic                        | Enforces structured output for parsed resume data                                   |
+| Experience Analysis               | FraudAnalyzerAI                 | Detects suspicious career patterns (short tenures, overlaps, unrealistic jumps)    |
+| Education Analysis                | AIEducationValidator            | Detects anomalies in academic background                                           |
+| Plagiarism Detection              | Pinecone (dense + sparse index) | Compares resumes against stored data and optional JD                                 |
+| Resume Plagiarism Embeddings      | OpenAI Embeddings / Custom LLM  | Creates vector embeddings for similarity search                                     |
+| Report Generation                 | FraudReportGenerator            | Aggregates all checks into a structured fraud report                                |
+| Logging & Monitoring              | Custom Logger / Python Logging  | Tracks system performance and errors                                               |
+| Environment & Secrets             | Python dotenv                   | Loads API keys and environment variables                                           |
+| Deployment / Development          | Docker / Localhost / Vercel     | Containerization and deployment setup                                               |
+| API Testing / Development         | Postman / curl                  | For testing API endpoints locally                                                  |
+| CORS & Security                   | FastAPI Middleware              | Allows cross-origin requests from frontend                                         |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+![alt text](image.png)

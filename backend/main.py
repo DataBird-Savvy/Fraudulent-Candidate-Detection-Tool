@@ -67,7 +67,7 @@ async def analyze_resume(file: UploadFile = File(...), jd: Optional[str] = Form(
             analysis, plagiarism_result_withcv, plagiarism_result_withJD, Education_analysis
         )
 
-        logger.info(f"Fraud report generated successfully")
+        logger.info(f"Fraud report generated successfully.{report}")
         return report
 
     except ResumeFraudException as e:
