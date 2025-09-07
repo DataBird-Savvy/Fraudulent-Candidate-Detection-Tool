@@ -1,0 +1,13 @@
+fastapi 
+uvicorn 
+pydantic 
+pdfplumber 
+python-docx 
+sentence-transformers 
+scikit-learn
+langchain 
+langchain_groq 
+docx2txt 
+python-dotenv
+
+
