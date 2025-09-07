@@ -79,4 +79,4 @@ The tool follows a modular architecture with the following key components:
 | CORS & Security                   | FastAPI Middleware              | Allows cross-origin requests from frontend                                         |
 
 
-![alt text](frontend\image-1.png)
+![alt text](image-1.png)
