@@ -1,3 +1,6 @@
+
+<img width="1083" height="430" alt="image" src="https://github.com/user-attachments/assets/a94cefb8-a45c-4522-89e8-90d0b371fbb3" />
+
 # Fraudulent Candidate Detection Tool
 
 ## 1. Introduction
@@ -78,3 +81,6 @@ The tool follows a modular architecture with the following key components:
 | Deployment / Development          | Docker / Localhost / Vercel     | Containerization and deployment setup                                               |
                                                  |
 | CORS & Security                   | FastAPI Middleware              | Allows cross-origin requests from frontend                                         |
+
+
+<img width="1083" height="889" alt="image" src="https://github.com/user-attachments/assets/fceb113b-ab79-4e12-b6ef-b3f86955b18d" />
