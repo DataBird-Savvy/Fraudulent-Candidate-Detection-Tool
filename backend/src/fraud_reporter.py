@@ -8,6 +8,7 @@ import os
 from logger import logger
 from exception import ResumeFraudException
 
+
 load_dotenv()
 
 
