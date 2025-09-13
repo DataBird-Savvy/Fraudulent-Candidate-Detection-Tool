@@ -7,7 +7,7 @@ The Fraudulent Candidate Detection Tool is designed to identify and flag potenti
 - Detect fake or inflated work experience.
 - Identify inconsistencies in educational background.
 - Compare candidate skills with stated experience.
-- Detect plagiarism or copied content in resumes.
+- Detect plagiarism or copied content in resumes/from JD.
 - Provide actionable insights for HR teams with recommendations.
 
 ## 3. System Architecture
@@ -51,7 +51,7 @@ The tool follows a modular architecture with the following key components:
 - Detects copied resumes or overlap with JD.  
 
 ### 5. Key Features
-- Automated resume parsing using NLP.  
+- Automated resume parsing using LLM.  
 - Fraud detection for education, experience, and skills.  
 - Plagiarism detection using embeddings and vector search.  
 - Actionable insights for HR teams.  
@@ -64,17 +64,15 @@ The tool follows a modular architecture with the following key components:
 | Layer / Component                | Technology / Tool               | Purpose / Description                                                                 |
 |---------------------------------|---------------------------------|-------------------------------------------------------------------------------------|
 | Frontend                         | React, Next.js                  | Provides a user-friendly interface for uploading resumes and viewing reports         |
-| Frontend Styling                  | CSS / Tailwind (optional)       | Styling and layout of the UI                                                       |
+| Frontend Styling                  | CSS                            | Styling and layout of the UI                                                       |
 | Backend                          | FastAPI                         | Handles API endpoints, resume analysis, and integrates various modules             |
 | Resume Parsing                    | LLaMA / Groq LLM                | Extract structured data (education, experience, skills, personal info) from resumes |
 | Schema Validation                 | Pydantic                        | Enforces structured output for parsed resume data                                   |
 | Experience Analysis               | FraudAnalyzerAI                 | Detects suspicious career patterns (short tenures, overlaps, unrealistic jumps)    |
 | Education Analysis                | AIEducationValidator            | Detects anomalies in academic background                                           |
 | Plagiarism Detection              | Pinecone (dense + sparse index) | Compares resumes against stored data and optional JD                                 |
-| Resume Plagiarism Embeddings      | OpenAI Embeddings / Custom LLM  | Creates vector embeddings for similarity search                                     |
+| Resume Plagiarism Embeddings      | dense:llama-text-embed-v2 /     | Creates vector embeddings for similarity search                               sparse:pinecone-sparse-english-v0|
 | Report Generation                 | FraudReportGenerator            | Aggregates all checks into a structured fraud report                                |
 | Logging & Monitoring              | Custom Logger / Python Logging  | Tracks system performance and errors                                               |
 | Environment & Secrets             | Python dotenv                   | Loads API keys and environment variables                                           |
-| Deployment / Development          | Docker / Localhost / Vercel     | Containerization and deployment setup                                               |
-                                                 |
-| CORS & Security                   | FastAPI Middleware              | Allows cross-origin requests from frontend                                         |
+
